@@ -45,7 +45,7 @@ function draw() {
       fill(255); // white shapes normally
     }
 
-    // Draw the appropriate shape
+    // Draw the shape
     if (shapeType[i] == 0) {
       ellipse(x[i], y[i], d[i]); // draw circle
     } else if (shapeType[i] == 1) {
@@ -58,14 +58,14 @@ function draw() {
 
 // when the mouse is clicked
 function mousePressed() {
-  // Add a new shape at the mouse position with random speeds and size
+  // Add a new shape at mouse click
   let randomXSpeed = random(-5, 5);
   let randomYSpeed = random(-5, 5);
   let randomSize = random(10, 30);
   addShape(mouseX, mouseY, randomXSpeed, randomYSpeed, randomSize);
 }
 
-// Function to add a new shape
+//add a new shape
 function addShape(newX, newY, newXSpeed, newYSpeed, newSize) {
   x.push(newX);
   y.push(newY);
@@ -76,9 +76,7 @@ function addShape(newX, newY, newXSpeed, newYSpeed, newSize) {
 }
 // This function is called whenever a key is pressed
 function keyPressed() {
-  // Check if the space bar is pressed
   if (key === ' ') {
-    // Toggle the invertColors flag
     invertColors = !invertColors;
   }
 }
