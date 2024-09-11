@@ -1,82 +1,98 @@
-let x = [];     // store x positions of shapes
-let y = [];     // store y positions of shapes
-let xSpeed = [];  // store x speeds of shapes
-let ySpeed = [];  // store y speeds of shapes
-let d = [];      // store diameters of shapes
-let shapeType = []; // store shape types
+// Variables for Shape 1
+let x1 = 100;
+let y1 = 0;
+let xSpeed1 = 3;
+let ySpeed1 = 7;
+let d1 = 20;
+let shapeType1 = 0; // 0 = circle, 1 = rectangle, 2 = triangle
 
-let invertColors = false; //color inversion
+// Variables for Shape 2
+let x2 = 200;
+let y2 = 10;
+let xSpeed2 = 7;
+let ySpeed2 = 3;
+let d2 = 10;
+let shapeType2 = 1; // 0 = circle, 1 = rectangle, 2 = triangle
 
+let invertColors = false; // invert colors
 
 function setup() {
-  createCanvas(2560, 1440);
-  
-  // two inital objects 
-  addShape(300, 0, 3, 7, 20);
-  addShape(500, 10, 7, 3, 10);
+  createCanvas(400, 400);
 }
 
 function draw() {
+  // Set the background color depending on the invertColors flag
   if (invertColors) {
-    background(255); // white background when inverted
+    background(255); // white background
   } else {
-    background(0); // black background normally
+    background(0); // black background
   }
 
-  // all shapes and update their positions
-  for (let i = 0; i < x.length; i++) {
-    // Check for collisions with walls and update position
-    if (x[i] > width || x[i] < 0) {
-      xSpeed[i] = xSpeed[i] * -1;
-      shapeType[i] = int(random(3)); // change shape on wall hit
-    }
-    x[i] = x[i] + xSpeed[i];
+  // Move and draw Shape 1
+  if (x1 > width || x1 < 0) {
+    xSpeed1 = xSpeed1 * -1;
+    shapeType1 = int(random(3)); // Change shape when hitting wall
+  }
+  x1 = x1 + xSpeed1;
 
-    if (y[i] > height || y[i] < 0) {
-      ySpeed[i] = ySpeed[i] * -1;
-      shapeType[i] = int(random(3)); // change shape on wall hit
-    }
-    y[i] = y[i] + ySpeed[i];
+  if (y1 > height || y1 < 0) {
+    ySpeed1 = ySpeed1 * -1;
+    shapeType1 = int(random(3)); // Change shape when hitting wall
+  }
+  y1 = y1 + ySpeed1;
 
+  // Draw the first shape
+  if (invertColors) {
+    fill(0); // black shape when inverted
+  } else {
+    fill(255); // white shape normally
+  }
 
-    if (invertColors) {
-      fill(0); // black shapes when inverted
-    } else {
-      fill(255); // white shapes normally
-    }
+  if (shapeType1 == 0) {
+    ellipse(x1, y1, d1); // draw a circle
+  } else if (shapeType1 == 1) {
+    rect(x1, y1, d1, d1); // draw a rectangle
+  } else {
+    triangle(x1, y1, x1 - d1 / 2, y1 + d1, x1 + d1 / 2, y1 + d1); // draw a triangle
+  }
 
-    // Draw the shape
-    if (shapeType[i] == 0) {
-      ellipse(x[i], y[i], d[i]); // draw circle
-    } else if (shapeType[i] == 1) {
-      rect(x[i], y[i], d[i], d[i]); // draw rectangle
-    } else {
-      triangle(x[i], y[i], x[i] - d[i] / 2, y[i] + d[i], x[i] + d[i] / 2, y[i] + d[i]); // draw triangle
-    }
+  // Move and draw Shape 2
+  if (x2 > width || x2 < 0) {
+    xSpeed2 = xSpeed2 * -1;
+    shapeType2 = int(random(3)); // Change shape when hitting wall
+  }
+  x2 = x2 + xSpeed2;
+
+  if (y2 > height || y2 < 0) {
+    ySpeed2 = ySpeed2 * -1;
+    shapeType2 = int(random(3)); // Change shape when hitting wall
+  }
+  y2 = y2 + ySpeed2;
+
+  // Draw the second shape
+  if (invertColors) {
+    fill(0); // black shape when inverted
+  } else {
+    fill(255); // white shape normally
+  }
+
+  if (shapeType2 == 0) {
+    ellipse(x2, y2, d2); // draw a circle
+  } else if (shapeType2 == 1) {
+    rect(x2, y2, d2, d2); // draw a rectangle
+  } else {
+    triangle(x2, y2, x2 - d2 / 2, y2 + d2, x2 + d2 / 2, y2 + d2); // draw a triangle
   }
 }
 
-// when the mouse is clicked
+// Add a shape at the mouse click location
 function mousePressed() {
-  // Add a new shape at mouse click
-  let randomXSpeed = random(-5, 5);
-  let randomYSpeed = random(-5, 5);
-  let randomSize = random(10, 30);
-  addShape(mouseX, mouseY, randomXSpeed, randomYSpeed, randomSize);
+  
 }
 
-//add a new shape
-function addShape(newX, newY, newXSpeed, newYSpeed, newSize) {
-  x.push(newX);
-  y.push(newY);
-  xSpeed.push(newXSpeed);
-  ySpeed.push(newYSpeed);
-  d.push(newSize);
-  shapeType.push(int(random(3))); 
-}
-// when space bar is clicked
+// invert colors with space bar
 function keyPressed() {
   if (key === ' ') {
-    invertColors = !invertColors;
+    invertColors = !invertColors; // Toggle between true and false
   }
 }
