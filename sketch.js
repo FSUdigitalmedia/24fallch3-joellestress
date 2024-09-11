@@ -74,7 +74,7 @@ function addShape(newX, newY, newXSpeed, newYSpeed, newSize) {
   d.push(newSize);
   shapeType.push(int(random(3))); 
 }
-// This function is called whenever a key is pressed
+// when space bar is clicked
 function keyPressed() {
   if (key === ' ') {
     invertColors = !invertColors;
