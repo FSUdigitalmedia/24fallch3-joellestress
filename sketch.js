@@ -17,7 +17,7 @@ let shapeType2 = 1; // 0 = circle, 1 = rectangle, 2 = triangle
 let invertColors = false; // invert colors
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1280, 720);
 }
 
 function draw() {
